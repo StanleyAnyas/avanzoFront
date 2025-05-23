@@ -251,7 +251,7 @@ class FoodDetailPage extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 252, 164, 84),
+                  backgroundColor: Colors.green,
                   padding: const EdgeInsets.symmetric(vertical: 12),
                 ),
                 child: const Text(

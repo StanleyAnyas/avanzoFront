@@ -32,10 +32,10 @@ class HomeScreen extends StatelessWidget {
       length: 2,
       initialIndex: 0,
       child: Scaffold(
-        body: const TabBarView(
+        body: TabBarView(
           children: [
             HomePage(),
-            ProfilePage()
+            UserProfileScreen(),
           ],
         ),
         bottomNavigationBar: Material(
