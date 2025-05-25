@@ -1,5 +1,7 @@
+import 'package:flu_new/view/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'add_food.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -9,6 +11,15 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
       title: appHomeTitle,
       home: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed:
+              () => Navigator.of(
+                context,
+                rootNavigator: true,
+              ).push(MaterialPageRoute(builder: (context) => AddFoodForm())),
+          backgroundColor: Colors.green,
+          child: const Icon(Icons.add, color: Colors.white),
+        ),
         appBar: AppBar(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -26,7 +37,7 @@ class HomePage extends StatelessWidget {
                 onTap: () => {
                  Navigator.of(context, rootNavigator: true).push(
                   MaterialPageRoute(
-                    builder: (context) => AddFoodForm()
+                    builder: (context) => UserProfileScreen()
                   )
                  )
                 },
@@ -34,7 +45,7 @@ class HomePage extends StatelessWidget {
                   backgroundColor: Colors.green,
                   radius: 18,
                   child: Icon(
-                    Icons.add,
+                    Icons.account_circle,
                     color: Colors.white,
                   ),
                 )
@@ -51,7 +62,7 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
-                 decoration: InputDecoration(
+                decoration: InputDecoration(
                   hintText: "Search food...",
                   prefixIcon: Icon(Icons.search),
                   // suffixIcon: Icon(Icons.filter_list),
@@ -64,9 +75,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(child: AvanzoList())
+            Expanded(child: AvanzoList()),
           ],
-        ) 
+        ),
       ),
     );
   }
@@ -74,16 +85,17 @@ class HomePage extends StatelessWidget {
 
 class AvanzoList extends StatelessWidget {
   final foodUploaded = "assets/images/foodexample.jpg";
+
   // String type = "free";
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: 6,
-      itemBuilder: (context, i){
+      itemBuilder: (context, i) {
         String type = "";
-        if (i % 2 == 0){ 
+        if (i % 2 == 0) {
           type = "€2";
-        }else{
+        } else {
           type = "Free";
         }
         return ListTile(
@@ -92,8 +104,8 @@ class AvanzoList extends StatelessWidget {
             height: 100,
             decoration: BoxDecoration(
               // border: Border.all(color: Colors.grey, width: 2),
-              borderRadius: BorderRadius.circular(8), 
-              color: Colors.grey.shade200
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.grey.shade200,
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
@@ -107,37 +119,45 @@ class AvanzoList extends StatelessWidget {
           ),
           title: Text(
             "Food item ${i + 1}",
-              style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
-                  // decoration: TextDecoration.underline,
-                )
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontStyle: FontStyle.italic,
+              // decoration: TextDecoration.underline,
+            ),
           ),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text("My house"),
               const SizedBox(height: 4),
-              Text(type, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+              Text(
+                type,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               const SizedBox(height: 4),
             ],
           ),
-          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.green,),
+          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.green),
           onTap: () {
             Navigator.of(context, rootNavigator: true).push(
               MaterialPageRoute(
-                builder: (context) => FoodDetailPage(
-                  foodTitle: "Food item ${i + 1}",
-                  foodImage: "assets/images/foodexample.jpg",
-                  description: "This is the description of the food, it will be a little bit long just for testing and stuffs",
-                  owner: "Francesco",
-                  pickupTime: "18:30",
-                ),
+                builder:
+                    (context) => FoodDetailPage(
+                      foodTitle: "Food item ${i + 1}",
+                      foodImage: "assets/images/foodexample.jpg",
+                      description:
+                          "This is the description of the food, it is really really really long for testing purposes, this food is created by the user, be careful of possible allergies",
+                      owner: "Francesco",
+                      pickupTime: "18:30",
+                    ),
               ),
             );
-          }
+          },
         );
       },
     );
@@ -150,25 +170,21 @@ class FoodDetailPage extends StatelessWidget {
   final String description;
   final String owner;
   final String pickupTime;
-  const FoodDetailPage(
-    {
-      super.key, 
-      required this.foodTitle, 
-      required this.foodImage,
-      required this.description,
-      required this.owner,
-      required this.pickupTime
-    }
-  );
+
+  const FoodDetailPage({
+    super.key,
+    required this.foodTitle,
+    required this.foodImage,
+    required this.description,
+    required this.owner,
+    required this.pickupTime,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0, 
-      ),
+      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -197,47 +213,47 @@ class FoodDetailPage extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.access_time, color: Colors.grey,), 
-                    SizedBox(width: 8,),
-                    Text("Pickup by 18:00")
+                    Icon(Icons.access_time, color: Colors.grey),
+                    SizedBox(width: 8),
+                    Text("Pickup by 18:00"),
                   ],
                 ),
                 // Text("Pickup by 18:00"),
-                SizedBox(height: 12,),
+                SizedBox(height: 12),
                 Row(
                   children: [
-                    Icon(Icons.location_on, color: Colors.grey,),
-                    SizedBox(width:  8,),
-                    Text("Location")
+                    Icon(Icons.location_on, color: Colors.grey),
+                    SizedBox(width: 8),
+                    Text("Location"),
                   ],
                 ),
                 // Text("Location"),
-                SizedBox(height: 12,),
+                SizedBox(height: 12),
                 // Text("description"),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.description, color: Colors.grey,),
-                    SizedBox(width: 8,),
+                    Icon(Icons.description, color: Colors.grey),
+                    SizedBox(width: 8),
                     Flexible(
                       child: Text(
-                        "This is the description of the food, it will be a little b it long just for testing and stuffs",
+                        "This is the description of the food, it is really really really long for testing purposes, this food is created by the user, be careful of possible allergies",
                         style: TextStyle(fontSize: 16),
                         softWrap: true,
-                      )
-                    )
+                      ),
+                    ),
                   ],
                 ),
-                SizedBox(height: 12,),
+                SizedBox(height: 12),
                 Row(
                   children: [
-                    Icon(Icons.person, color: Colors.grey,),
-                    SizedBox(width: 8,),
-                    Text("Francesco")
+                    Icon(Icons.person, color: Colors.grey),
+                    SizedBox(width: 8),
+                    Text("Francesco"),
                   ],
-                )
+                ),
               ],
-            )
+            ),
           ),
           // const Spacer(), // pushes the button to the bottom
           Padding(
@@ -260,7 +276,7 @@ class FoodDetailPage extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
