@@ -28,7 +28,11 @@ class UserProfileScreen extends StatelessWidget {
                     child: CircleAvatar(
                       backgroundColor: Colors.green,
                       radius: 16,
-                      child: Icon(Icons.camera_alt, color: Colors.white, size: 18),
+                      child: Icon(
+                        Icons.camera_alt,
+                        color: Colors.white,
+                        size: 18,
+                      ),
                     ),
                   ),
                 ],
@@ -36,8 +40,14 @@ class UserProfileScreen extends StatelessWidget {
             ),
             SizedBox(height: 16),
 
-            Text("John Doe", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-            Text("johndoe@example.com", style: TextStyle(color: Colors.grey[700])),
+            Text(
+              "John Doe",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "johndoe@example.com",
+              style: TextStyle(color: Colors.grey[700]),
+            ),
             SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -66,7 +76,10 @@ class UserProfileScreen extends StatelessWidget {
   Widget _buildStatBox(String label, String value) {
     return Column(
       children: [
-        Text(value, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        Text(
+          value,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
         Text(label, style: TextStyle(color: Colors.grey[700])),
       ],
     );
